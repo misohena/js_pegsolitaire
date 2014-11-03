@@ -452,6 +452,26 @@
         return board;
     }
 
+    mypkg.create4HolesBoard = create4HolesBoard;
+    function create4HolesBoard()
+    {
+        var board = new RectangularBoard(4,1);
+        board.boreHoleAll();
+        board.fillPegAll();
+        board.pullPeg(board.xy(1,0));
+        return board;
+    }
+
+    mypkg.create5HolesBoard = create5HolesBoard;
+    function create5HolesBoard()
+    {
+        var board = new RectangularBoard(3,3);
+        board.fillRect(0,0,3,1, true);
+        board.fillRect(1,1,1,2, true);
+        board.pullPeg(board.xy(2,0));
+        return board;
+    }
+
 
     mypkg.History = History;
     function History()
@@ -683,7 +703,9 @@
             {id:"Triangular5", ctor:createTriangular5Board, title:"Triangular5(15 holes)"},
             {id:"Hexagonal5", ctor:createHexagonal5Board, title:"Hexagonal5(61 holes)"},
             {id:"Propeller", ctor:createPropellerBoard, title:"Propeller(16 holes)"},
-            {id:"Minimum", ctor:createMinimumBoard, title:"Minimum(3 holes)"}
+            {id:"Minimum", ctor:createMinimumBoard, title:"Minimum(3 holes)"},
+            {id:"4Holes", ctor:create4HolesBoard, title:"4Holes(4 holes)"},
+            {id:"5Holes", ctor:create5HolesBoard, title:"5Holes(5 holes)"}
         ];
 
         var controlDiv = newElem("div", gameDiv);
