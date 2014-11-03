@@ -139,10 +139,10 @@
             }
             return true;
         };
-        this.eachHole = function(fun){
+        this.eachHole = function(fun, includingInvalidHoles){
             var holeCount = this.getHoleCount();
             for(var id = 0; id < holeCount; ++id){
-                if(this.hasValidHole(id)){
+                if(includingInvalidHoles || this.hasValidHole(id)){
                     fun(id);
                 }
             }
@@ -493,7 +493,7 @@
     // View/Control
     //
 
-    function drawBoardToCanvas(canvas, ctx, board, opt, draggingPeg)
+    function drawBoardToCanvas(canvas, ctx, board, opt, draggingPeg, drawInvalidHoles)
     {
         ctx.clearRect(0,0,canvas.width, canvas.height);
         var left = opt.paddingLeft;
@@ -502,6 +502,24 @@
         var holeSpanY = opt.holeSpanY;
         var holeRadius = opt.holeRadius;
         var pegRadius = opt.pegRadius;
+
+        // Invalid Holes
+        if(drawInvalidHoles){
+            board.eachHole(function(holeId){
+                if(!board.hasValidHole(holeId)){
+                    var holeX = left + board.getHolePositionX(holeId) * holeSpanX;
+                    var holeY = top  + board.getHolePositionY(holeId) * holeSpanY;
+                    ctx.beginPath();
+                    ctx.moveTo(holeX-pegRadius, holeY);
+                    ctx.lineTo(holeX+pegRadius, holeY);
+                    ctx.moveTo(holeX, holeY-pegRadius);
+                    ctx.lineTo(holeX, holeY+pegRadius);
+                    ctx.strokeStyle = "black";
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            }, true);
+        }
 
         // Hole
         board.eachHole(function(holeId){
