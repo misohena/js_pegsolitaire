@@ -336,8 +336,8 @@
                 case 1: return pos.y+1 < size ? holeId+w+1 : INVALID_HOLE_ID;
                 case 2: return pos.y+1 < size ? holeId+w : INVALID_HOLE_ID;
                 case 3: return pos.x > 0 ? holeId-1 : INVALID_HOLE_ID;
-                case 4: return pos.y > 0 ? holeId-w : INVALID_HOLE_ID;
-                case 5: return pos.y > 0 ? holeId-w+1 : INVALID_HOLE_ID;
+                case 4: return pos.x > 0 && pos.y > 0 ? holeId-w : INVALID_HOLE_ID;
+                case 5: return pos.x+1 < w && pos.y > 0 ? holeId-w+1 : INVALID_HOLE_ID;
                 }
             }
             return INVALID_HOLE_ID;
