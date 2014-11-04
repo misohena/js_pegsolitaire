@@ -219,7 +219,7 @@
         var str = "";
         for(var id = 0; id < holes.length; ++id){
             var h = holes[id];
-            str += h === true ? "@" : h === false ? "O" : ".";
+            str += h === true ? "P" : h === false ? "O" : "_";
         }
         return str;
     };
@@ -227,7 +227,7 @@
         var holes = [];
         for(var i = 0; i < str.length; ++i){
             var c = str.charAt(i);
-            holes.push(c == "@" ? true : c == "O" ? false : undefined);
+            holes.push(c == "P" ? true : c == "O" ? false : undefined);
         }
         return holes;
     };
@@ -936,9 +936,9 @@
             {id:"Minimum", ctor:createMinimumBoard, title:"Minimum(3 holes)"},
             {id:"4Holes", ctor:create4HolesBoard, title:"4Holes(4 holes)"},
             {id:"5Holes", ctor:create5HolesBoard, title:"5Holes(5 holes)"},
-            {id:"Banzai7", str:"H 3 3 O@O@@..@@", title:"Banzai7(7 holes)"},
-            {id:"Owl", str:"H 4 4 .@@@@OO@.@@@.@@.", title:"Owl(12 holes)"}
 
+            {id:"Banzai7", str:"H 3 3 OPOPP__PP", title:"Banzai7(7 holes)"},
+            {id:"Owl", str:"H 4 4 _PPPPOOP_PPP_PP_", title:"Owl(12 holes)"},
         ];
     };
 
