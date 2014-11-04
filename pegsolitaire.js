@@ -1075,7 +1075,7 @@
                     var pageURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
                     var urlText = newElem("input", dlg);
                     urlText.setAttribute("type", "text");
-                    urlText.value = pageURL + "?p=" + currentCanvas.pegsolitaire.board.toString().replace(" ", "+", "g");
+                    urlText.value = pageURL + "?p=" + currentCanvas.pegsolitaire.board.toString().replace(/ /g, "+");
                     newElem("br", dlg);
                     if(opt.scriptURL){
                         dlg.appendChild(newTextNode("Embed Script:"));
@@ -1277,7 +1277,7 @@
             var ps = q.split("&");
             for(var pi = 0; pi < ps.length; ++pi){
                 var nv = ps[pi].split("=");
-                result[nv[0]] = decodeURI(nv[1].replace("+", " ", "g"));
+                result[nv[0]] = decodeURI(nv[1].replace(/\+/g, " "));
             }
         }
         return result;
