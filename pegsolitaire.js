@@ -480,10 +480,10 @@
             var holes = GridBoardBase.convertStringToHoles(holesStr);
             return new ctor(w, h, holes);
         }
-        function createBoardSize(ctor, lines){
+        function createBoardTriangle(ctor, lines){
             var size = parseInt(lines[1], 10);
             var holesStr = lines[2];
-            if(!(size >= 0 && size < MAX_BOARD_SIZE) || holesStr.length != size){
+            if(!(size >= 0 && size < MAX_BOARD_SIZE) || holesStr.length != (size*(size+1))/2){
                 return null;
             }
             var holes = GridBoardBase.convertStringToHoles(holesStr);
@@ -498,7 +498,7 @@
         case HexGridBoard.TYPEID:
             return createBoardWidthHeight(HexGridBoard, lines);
         case TriangularBoard.TYPEID:
-            return createBoardSize(TriangularBoard, lines);
+            return createBoardTriangle(TriangularBoard, lines);
         default:
             return null;
         }
