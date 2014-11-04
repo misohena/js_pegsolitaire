@@ -936,9 +936,12 @@
             {id:"Minimum", ctor:createMinimumBoard, title:"Minimum(3 holes)"},
             {id:"4Holes", ctor:create4HolesBoard, title:"4Holes(4 holes)"},
             {id:"5Holes", ctor:create5HolesBoard, title:"5Holes(5 holes)"},
-
+            {id:"Easy Pinwheel", str:"R 4 4 __P_OPP__PPP_P__", title:"Easy Pinwheel(8 holes)"},
             {id:"Banzai7", str:"H 3 3 OPOPP__PP", title:"Banzai7(7 holes)"},
+            {id:"Megaphone", str:"H 4 4 _P__PPPP__PP__O_", title:"Megaphone(8 holes)"},
             {id:"Owl", str:"H 4 4 _PPPPOOP_PPP_PP_", title:"Owl(12 holes)"},
+            {id:"Star", str:"H 4 5 __O_PPPP_PPPPPPP__P_", title:"Star(13 holes)"},
+            {id:"Arrow9", str:"H 4 4 __P_OPP__PPP_PP_", title:"Arrow9(9 holes)"}
         ];
     };
 
