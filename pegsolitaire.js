@@ -1065,6 +1065,39 @@
                 editorDiv.parentNode.removeChild(editorDiv);
                 editorDiv = null;
             });
+            if(opt.enableShare){
+                newButton(editorDiv, "Share", function(){
+                    var dlg = newElem("div", editorDiv);
+                    dlg.appendChild(newTextNode("Share:"));
+                    newElem("br", dlg);
+                    dlg.appendChild(newTextNode("URL:"));
+                    newElem("br", dlg);
+                    var pageURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                    var urlText = newElem("input", dlg);
+                    urlText.setAttribute("type", "text");
+                    urlText.value = pageURL + "?p=" + currentCanvas.pegsolitaire.board.toString().replace(" ", "+", "g");
+                    newElem("br", dlg);
+                    if(opt.scriptURL){
+                        dlg.appendChild(newTextNode("Embed Script:"));
+                        newElem("br", dlg);
+                        var embedText = newElem("textarea", dlg);
+                        embedText.setAttribute("rows", "2");
+                        embedText.value =
+                            "<script src='" + opt.scriptURL + "'></script>\n"+
+                            "<script>misohena.js_solitaire.insertGameBoxBeforeCurrentScript({\n"+
+                            "  boardText:'" + currentCanvas.pegsolitaire.board.toString() + "'\n"+
+                            "});\n"+
+                            "</script>";
+                        newElem("br", dlg);
+                    }
+                    newButton(dlg, "Close", function(){
+                        closeDlg();
+                    });
+                    function closeDlg(){
+                        dlg.parentNode.removeChild(dlg);
+                    }
+                });
+            }
             newButton(editorDiv, "Export", function(){
                 var dlg = newElem("div", editorDiv);
                 dlg.appendChild(document.createTextNode("Export:"));
@@ -1187,6 +1220,15 @@
         return gameDiv;
     }
 
+    mypkg.insertGameBoxBeforeCurrentScript = insertGameBoxBeforeCurrentScript;
+    function insertGameBoxBeforeCurrentScript(opt)
+    {
+        var script = getLastScriptNode();
+        var gameBox = createGameBox(opt);
+        script.parentNode.insertBefore(gameBox, script);
+        return gameBox;
+    }
+
 
     //
     // HTML Utility
@@ -1226,6 +1268,20 @@
         return document.createTextNode(text);
     }
 
+    mypkg.getQueryParams = getQueryParams;
+    function getQueryParams()
+    {
+        var result = {};
+        var q = document.location.search.substr(1);
+        if(q.length > 0){
+            var ps = q.split("&");
+            for(var pi = 0; pi < ps.length; ++pi){
+                var nv = ps[pi].split("=");
+                result[nv[0]] = decodeURI(nv[1].replace("+", " ", "g"));
+            }
+        }
+        return result;
+    }
 
 })(this);
 

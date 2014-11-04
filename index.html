@@ -11,7 +11,11 @@
     <script>
       (function(){
         var mjp = misohena.js_pegsolitaire;
-        mjp.getLastScriptNode().parentNode.appendChild(mjp.createGameBox());
+        mjp.getLastScriptNode().parentNode.appendChild(mjp.createGameBox({
+          boardText:mjp.getQueryParams()["p"],
+          enableShare:true,
+          scriptURL:"http://misohena.github.io/js_pegsolitaire/pegsolitaire.js"
+        }));
       })();
     </script>
 
