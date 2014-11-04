@@ -11,6 +11,8 @@
     var INVALID_HOLE_ID = -1;
     var INVALID_DIR = -1;
 
+    var MAX_BOARD_SIZE = 50;
+
     function BoardBase()
     {
         this.pushPeg = function(holeId){
@@ -472,7 +474,7 @@
             var w = parseInt(lines[1], 10);
             var h = parseInt(lines[2], 10);
             var holesStr = lines[3];
-            if(!(w >= 0 && w < 100) || !(h >= 0 && h < 100) || holesStr.length != w*h){
+            if(!(w >= 0 && w < MAX_BOARD_SIZE) || !(h >= 0 && h < MAX_BOARD_SIZE) || holesStr.length != w*h){
                 return null;
             }
             var holes = GridBoardBase.convertStringToHoles(holesStr);
@@ -481,7 +483,7 @@
         function createBoardSize(ctor, lines){
             var size = parseInt(lines[1], 10);
             var holesStr = lines[2];
-            if(!(size >= 0 && size < 10000) || holesStr.length != size){
+            if(!(size >= 0 && size < MAX_BOARD_SIZE) || holesStr.length != size){
                 return null;
             }
             var holes = GridBoardBase.convertStringToHoles(holesStr);
