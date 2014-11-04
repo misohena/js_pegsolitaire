@@ -954,6 +954,11 @@
             opt = {};
         }
 
+        var catalog = opt.catalog || getBoardCatalog();
+        if(opt.boardText){
+            catalog.splice(0, 0, {id:"Default", ctor:function(){return parseBoard(opt.boardText);}, title:"Default"});
+        }
+
         var gameDiv = newElem("div");
 
         // control
@@ -962,9 +967,8 @@
 
         var boardCtors = {};
         var selectBoard = null;
-        if(!opt.disableCatalog){
+        if(!opt.disableCatalogSelect){
             selectBoard = newElem("select", controlDiv);
-            var catalog = opt.catalog || getBoardCatalog();
             for(var i = 0; i < catalog.length; ++i){
                 var option = newElem("option", selectBoard);
                 option.setAttribute("value", catalog[i].id);
@@ -1028,8 +1032,7 @@
         function newGame(){
             var creator =
                     selectBoard ? boardCtors[selectBoard.value] :
-                    opt.boardText ? function(){parseBoard(opt.boardText);} :
-                    opt.boardCtor ? opt.boardCtor :
+                    catalog.length > 0 ? catalog[0].ctor :
                     null;
             if(creator){
                 newBoard(creator());
