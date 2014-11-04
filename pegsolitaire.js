@@ -1084,7 +1084,7 @@
                         embedText.setAttribute("rows", "2");
                         embedText.value =
                             "<script src='" + opt.scriptURL + "'></script>\n"+
-                            "<script>misohena.js_solitaire.insertGameBoxBeforeCurrentScript({\n"+
+                            "<script>misohena.js_pegsolitaire.insertGameBoxBeforeCurrentScript({\n"+
                             "  boardText:'" + currentCanvas.pegsolitaire.board.toString() + "'\n"+
                             "});\n"+
                             "</script>";
