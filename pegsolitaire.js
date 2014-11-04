@@ -1061,7 +1061,17 @@
                 editorDiv = null;
             });
             newButton(editorDiv, "Export", function(){
-                alert(currentCanvas.pegsolitaire.board.toString());
+                var dlg = newElem("div", editorDiv);
+                dlg.appendChild(document.createTextNode("Export:"));
+                var text = newElem("input", dlg);
+                text.setAttribute("type", "text");
+                text.value = currentCanvas.pegsolitaire.board.toString();
+                newButton(dlg, "Close", function(){
+                    closeDlg();
+                });
+                function closeDlg(){
+                    dlg.parentNode.removeChild(dlg);
+                }
             });
             newButton(editorDiv, "Import", function(){
                 var dlg = newElem("div", editorDiv);
